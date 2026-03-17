@@ -34,7 +34,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: https://github.com/AdamDruszad/BrowserExtensionManager
-- Live Site URL: [IDE MÁSOLD AZ ÉLŐ OLDAL LINKJÉT]
+- Live Site URL: https://adamdruszad.github.io/BrowserExtensionManager/
 
 ## My process
 
