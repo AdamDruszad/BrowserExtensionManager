@@ -33,7 +33,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [IDE MÁSOLD A GITHUB REPO LINKJÉT]
+- Solution URL: https://github.com/AdamDruszad/BrowserExtensionManager
 - Live Site URL: [IDE MÁSOLD AZ ÉLŐ OLDAL LINKJÉT]
 
 ## My process
