@@ -1,0 +1,264 @@
+:root {
+  --neutral-900: hsl(227, 75%, 14%);
+  --neutral-800: hsl(226, 25%, 17%);
+  --neutral-700: hsl(225, 23%, 24%);
+  --neutral-600: hsl(226, 11%, 37%);
+  --neutral-300: hsl(0, 0%, 78%);
+  --neutral-200: hsl(217, 61%, 90%);
+  --neutral-100: hsl(0, 0%, 93%);
+  --neutral-0: hsl(200, 60%, 99%);
+
+  --red-400: hsl(3, 86%, 64%);
+  --red-500: hsl(3, 71%, 56%);
+  --red-700: hsl(3, 77%, 44%);
+
+  --light-gradient: linear-gradient(180deg, #ebf2fc 0%, #eef8f9 100%);
+  --dark-gradient: linear-gradient(180deg, #040918 0%, #091540 100%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 16px;
+  background: var(--dark-gradient);
+  color: var(--neutral-0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+header,
+main {
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 30px;
+}
+
+header {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--neutral-800);
+  border-radius: 15px;
+}
+
+.logo {
+  height: 45px;
+  width: 180px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.switcher {
+  background: var(--neutral-700);
+  color: var(--neutral-0);
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.filter-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-buttons button {
+  border: none;
+  border-radius: 50px;
+  background: var(--neutral-700);
+  color: var(--neutral-0);
+  padding: 8px 20px;
+  cursor: pointer;
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.active-btn {
+  background: var(--red-400) !important;
+}
+
+.extensions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 35px;
+  width: 100%;
+  margin-bottom: 80px;
+}
+
+.card {
+  background: var(--neutral-800);
+  border-radius: 15px;
+  border: 2px solid var(--neutral-700);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.card-info img {
+  width: 54px;
+  height: 54px;
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-text p {
+  color: var(--neutral-300);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.remove-btn {
+  border: 1px solid var(--neutral-700);
+  color: var(--neutral-200);
+  background: var(--neutral-800);
+  border-radius: 40px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.toggle-switch {
+  width: 44px;
+  height: 24px;
+  position: relative;
+  display: inline-block;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 30px;
+  background: var(--neutral-600);
+  transition: 0.3s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background-color: #fff;
+  bottom: 3px;
+  left: 3px;
+  transition: 0.3s;
+  height: 18px;
+  width: 18px;
+}
+
+/* 1. Change background to red when checkbox is checked */
+.toggle-switch input:checked + .slider {
+  background: var(--red-500);
+}
+
+/* 2. Slide the white dot to the right when checked */
+.toggle-switch input:checked + .slider::before {
+  /* Switch is 44px wide, dot is 18px. Translating 20px moves it exactly to the right side */
+  transform: translateX(20px);
+}
+
+/* --- LIGHT THEME OVERRIDES --- */
+/* Variables are updated when the body gets the 'light-theme' class */
+body.light-theme {
+  --dark-gradient: var(--light-gradient);
+
+  /* White background for cards, header, and remove button */
+  --neutral-800: #ffffff;
+
+  /* Dark blue main text color */
+  --neutral-0: hsl(227, 75%, 14%);
+
+  /* Light gray background for buttons and borders */
+  --neutral-700: hsl(217, 61%, 90%);
+
+  /* Dark gray text for buttons */
+  --neutral-200: hsl(226, 11%, 37%);
+
+  /* Slightly darker description text for better readability on white background */
+  --neutral-300: hsl(226, 11%, 37%);
+
+  --neutral-600: hsl(227, 6%, 68%);
+}
+
+/* --- RESPONSIVE DESIGN (Mobile view) --- */
+@media (max-width: 768px) {
+  /* 1. Add some margin to the sides */
+  header,
+  main {
+    width: 90%;
+  }
+
+  /* 2. Stack the title and filter buttons vertically and center them */
+  .head {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* 3. Change grid from 3 columns to 1 column */
+  .extensions-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- ATTRIBUTION (Frontend Mentor) --- */
+.attribution {
+  font-size: 14px;
+  text-align: center;
+  padding: 20px 0;
+  color: var(--neutral-300);
+  margin-top: auto;
+}
+
+.attribution a {
+  color: var(--neutral-0);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.attribution a:hover {
+  color: var(--red-500);
+}
