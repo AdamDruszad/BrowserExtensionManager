@@ -8,12 +8,12 @@ This is a UI demo using bundled sample data. It does not access, install or chan
 
 ## Features
 
-- Enable, disable, remove and filter extension cards without losing the current filter.
-- Save extension changes and the light/dark theme in local storage.
+- Enable, disable, remove (with Undo) and filter extensions without losing the current filter.
+- Save extension changes and the light/dark theme in local storage; without a saved choice the theme follows the OS.
 - Restore the original demo with **Reset list**.
 - Loading, empty and error states with a retry action.
 - Semantic controls, named switches, keyboard focus recovery and live announcements.
-- Responsive CSS Grid, Manrope / Instrument Serif via Google Fonts, a bundled Noto Sans fallback and reduced-motion support.
+- Responsive rail-and-list layout, Archivo via Google Fonts, halftone state styling and reduced-motion support.
 - Validate loaded data, restrict logos to relative local image paths, and render names and descriptions as text.
 - End stalled data requests after ten seconds and offer a retry.
 

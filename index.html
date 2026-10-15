@@ -2,66 +2,86 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-BgcgbhghESsPVdxYAFJ2xBldjZse6vtBDEmwr3FAAME='; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browser Extension Manager | Biró Ádám</title>
     <meta name="description" content="A responsive extension manager UI demo with filtering, theme selection and saved extension states. Built by Biró Ádám." />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#1f3680" />
+    <link rel="canonical" href="https://adamdruszad.github.io/BrowserExtensionManager/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Browser Extension Manager | Biró Ádám" />
+    <meta property="og:description" content="A responsive extension manager UI demo with filtering, theme selection and saved extension states. Built by Biró Ádám." />
+    <meta property="og:url" content="https://adamdruszad.github.io/BrowserExtensionManager/" />
+    <meta name="twitter:card" content="summary" />
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
+    <script>try{var t=localStorage.getItem("extension-manager-theme");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.dataset.theme=t}catch(e){}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
-    <title>Browser Extension Manager | Biró Ádám</title>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to extensions</a>
-    <header class="site-header">
-      <div class="header-inner page-shell">
-        <a class="wordmark" href="./" aria-label="Extensions home">
-          <svg class="brand-mark" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="2" y="2" width="10" height="10" rx="2" fill="currentColor"/><rect x="16" y="2" width="10" height="10" rx="2" fill="currentColor"/><rect x="2" y="16" width="10" height="10" rx="2" fill="currentColor"/><path d="M21 16v10m-5-5h10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-          extensions<span class="wordmark-dot">.</span>
-        </a>
-        <span class="header-caption">A place for your browser tools</span>
-        <button class="switcher" type="button" aria-label="Switch to light theme" title="Switch to light theme">
-          <img src="./assets/images/icon-sun.svg" alt="" width="18" height="18" />
-          <span class="theme-label">Light mode</span>
-        </button>
-      </div>
-    </header>
-    <main id="main" class="page-shell" tabindex="-1">
-      <section class="workspace-intro" aria-labelledby="page-title">
-        <div class="intro-copy">
-          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Your browser workspace</p>
-          <h1 id="page-title">Good tools. <em>Less clutter.</em></h1>
-          <p class="intro-description">Keep what works. Pause what doesn’t.<br />Make a little room for a more focused browser.</p>
+    <div class="app">
+      <header class="rail">
+        <div class="rail-top">
+          <a class="wordmark" href="./" aria-label="Extensions home">
+            <svg class="brand-mark" width="26" height="26" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="2" y="2" width="10" height="10" rx="2" fill="currentColor"/><rect x="16" y="2" width="10" height="10" rx="2" fill="currentColor"/><rect x="2" y="16" width="10" height="10" rx="2" fill="currentColor"/><path d="M21 16v10m-5-5h10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <span>extensions<span class="wordmark-dot">.</span></span>
+          </a>
+          <button class="switcher" type="button" aria-label="Switch to light theme" title="Switch to light theme">
+            <svg class="icon-sun" width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.98" d="M11 1.833v1.834m0 14.666v1.834M3.667 11H1.833m3.955-5.212L4.492 4.492m11.72 1.296 1.297-1.296M5.788 16.215l-1.296 1.296m11.72-1.296 1.297 1.296M20.167 11h-1.834m-2.75 0a4.583 4.583 0 1 1-9.167 0 4.583 4.583 0 0 1 9.167 0Z"/></svg>
+            <svg class="icon-moon" width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.98" d="M20.125 11.877A7.333 7.333 0 1 1 10.124 1.875a9.168 9.168 0 1 0 10.001 10.002Z"/></svg>
+            <span class="theme-label">Light mode</span>
+          </button>
         </div>
-        <div class="workspace-summary" aria-label="Extension summary">
-          <span class="summary-count" id="total-count">—</span>
-          <div class="summary-copy"><span>extensions in your toolkit</span><p><span class="status-dot" aria-hidden="true"></span><span id="active-summary">Loading your workspace</span></p></div>
+        <p class="tagline">A place for your browser tools</p>
+        <h1 id="page-title">Good tools. <em>Less clutter.</em></h1>
+        <p class="intro">Keep what works. Pause what doesn’t.<br />Make a little room for a more focused browser.</p>
+        <section class="toolkit" aria-labelledby="toolkit-title">
+          <h2 id="toolkit-title" class="toolkit-title">Your browser workspace</h2>
+          <ol class="toolkit-strip" aria-hidden="true"></ol>
+          <p class="toolkit-total"><span class="toolkit-count" id="total-count">—</span> <span id="total-label">extensions in your toolkit</span></p>
+          <p class="toolkit-split" id="active-summary">Loading your workspace</p>
+        </section>
+      </header>
+
+      <main id="main" tabindex="-1">
+        <div class="list-head">
+          <h2 id="list-title">Your extensions</h2>
+          <p class="hint">Enable only what you need.</p>
+          <button id="reset-btn" type="button" class="reset-btn" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10a9 9 0 1 1 2 8M3 4v6h6"/></svg><span>Reset list</span></button>
         </div>
-      </section>
-      <div class="library-toolbar">
-        <div class="library-title"><span class="eyebrow">01 /</span><h2>Your extensions</h2></div>
-        <div class="filter-buttons" role="group" aria-label="Filter extensions">
-          <button type="button" class="active-btn" data-filter="all" aria-pressed="true" disabled>All <span data-count="all">—</span></button>
-          <button type="button" data-filter="active" aria-pressed="false" disabled>Active <span data-count="active">—</span></button>
-          <button type="button" data-filter="inactive" aria-pressed="false" disabled>Inactive <span data-count="inactive">—</span></button>
+        <div class="controls">
+          <div class="filter-buttons" role="group" aria-label="Filter extensions">
+            <button type="button" class="active-btn" data-filter="all" aria-pressed="true" disabled>All <span class="count" data-count="all">—</span></button>
+            <button type="button" data-filter="active" aria-pressed="false" disabled>Active <span class="count" data-count="active">—</span></button>
+            <button type="button" data-filter="inactive" aria-pressed="false" disabled>Inactive <span class="count" data-count="inactive">—</span></button>
+          </div>
+          <p id="visible-summary" class="caption">Getting your tools ready…</p>
         </div>
-        <button id="reset-btn" type="button" class="reset-btn" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10a9 9 0 1 1 2 8M3 4v6h6"/></svg>Reset list</button>
-      </div>
-      <div class="library-caption">
-        <p id="visible-summary">Getting your tools ready…</p>
-        <span>Enable only what you need.</span>
-      </div>
-      <p id="announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
-      <p id="feedback" class="feedback" role="status">Loading extensions…</p>
-      <button id="retry-btn" type="button" class="remove-btn" hidden>Try again</button>
-      <div class="extensions-grid" aria-busy="true"></div>
-      <noscript><p>Please enable JavaScript to use the extension manager.</p></noscript>
-      <aside class="demo-note"><span class="note-marker" aria-hidden="true">i</span><p>An interactive demo. Manage this sample library; your actual browser extensions stay untouched.</p></aside>
-    </main>
-    <footer class="attribution page-shell">
-      <a class="creator" href="https://github.com/AdamDruszad">Built by Biró Ádám <span aria-hidden="true">↗</span></a>
-      <p>A <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a> project.</p>
-    </footer>
+        <p id="announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+        <div id="feedback" class="feedback">
+          <p id="feedback-text">Loading extensions…</p>
+          <button id="retry-btn" type="button" class="retry-btn" hidden>Try again</button>
+        </div>
+        <ul class="extension-list" aria-labelledby="list-title" aria-busy="true"></ul>
+        <noscript><p class="feedback">Please enable JavaScript to use the extension manager.</p></noscript>
+        <div class="undo-bar" id="undo-bar" hidden>
+          <p id="undo-text"></p>
+          <button id="undo-btn" type="button" class="undo-btn">Undo</button>
+        </div>
+      </main>
+
+      <footer class="colophon">
+        <p class="demo-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.01"/></svg><span>An interactive demo. Manage this sample library; your actual browser extensions stay untouched.</span></p>
+        <div class="credits">
+          <a class="creator" href="https://github.com/AdamDruszad">Built by Biró Ádám<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <p>A <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a> project.</p>
+        </div>
+      </footer>
+    </div>
     <script type="module" src="script.js"></script>
   </body>
 </html>
