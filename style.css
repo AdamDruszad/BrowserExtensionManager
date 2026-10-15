@@ -716,6 +716,12 @@ main {
   color: #1b2b5e;
 }
 
+/* While the sticky Undo bar is showing (52px tall, 16px from the bottom), keep keyboard focus
+   clear of it: focused controls scroll up past the bar instead of sitting underneath it. */
+html:has(#undo-bar:not([hidden])) {
+  scroll-padding-bottom: 5rem;
+}
+
 /* Colophon -------------------------------------------------------------- */
 
 .colophon {
