@@ -1,79 +1,51 @@
-# Frontend Mentor - Browser extensions manager UI solution
+# Browser Extension Manager
 
-This is my solution to the [Browser extensions manager UI challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/browser-extension-manager-ui-yNZnOfsMAp).
+A responsive, vanilla JavaScript solution to the [Frontend Mentor Browser extensions manager UI challenge](https://www.frontendmentor.io/challenges/browser-extension-manager-ui-yNZnOfsMAp).
 
-## Table of contents
+This is a UI demo using bundled sample data. It does not access, install or change actual browser extensions.
 
-- [Overview](#overview)
-  - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
-  - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
-  - [AI Collaboration](#ai-collaboration)
-- [Author](#author)
+[Live demo](https://adamdruszad.github.io/BrowserExtensionManager/) · [Source](https://github.com/AdamDruszad/BrowserExtensionManager)
 
-## Overview
+## Features
 
-### The challenge
+- Enable, disable, remove and filter extension cards without losing the current filter.
+- Save extension changes and the light/dark theme in local storage.
+- Restore the original demo with **Reset list**.
+- Loading, empty and error states with a retry action.
+- Semantic controls, named switches, keyboard focus recovery and live announcements.
+- Responsive CSS Grid, Manrope / Instrument Serif via Google Fonts, a bundled Noto Sans fallback and reduced-motion support.
+- Validate loaded data, restrict logos to relative local image paths, and render names and descriptions as text.
+- End stalled data requests after ten seconds and offer a retry.
 
-Users should be able to:
+If browser storage is unavailable, the controls still work for the current visit. Removed cards and enabled states are stored by extension name; resetting the list clears these overrides but keeps the chosen theme.
 
-- Toggle extensions between active and inactive states
-- Filter active and inactive extensions
-- Remove extensions from the list
-- Select their color theme (Dark/Light mode)
-- View the optimal layout depending on their device's screen size
+## Run locally
 
-### Screenshot
-
-![](./screenshot.png)
-
-### Links
-
-- Solution URL: https://github.com/AdamDruszad/BrowserExtensionManager
-- Live Site URL: https://adamdruszad.github.io/BrowserExtensionManager/
-
-## My process
-
-### Built with
-
-- Semantic HTML5 markup
-- CSS custom properties (Variables)
-- Flexbox & CSS Grid
-- Mobile-first workflow
-- Vanilla JavaScript (Fetch API & DOM manipulation)
-
-### What I learned
-
-During this project, I improved my skills in handling asynchronous data and dynamic UI updates. One of the highlights was implementing a robust "Remove" functionality using event delegation:
-
-```js
-grid.addEventListener("click", (event) => {
-  if (event.target.classList.contains("remove-btn")) {
-    let nameToDelete = event.target.dataset.name;
-    event.target.closest(".card").remove();
-    allData = allData.filter((item) => item.name !== nameToDelete);
-  }
-});
-
-I also learned how to manage global state (the allData array) to ensure that filtering and theme switching work seamlessly together even after items are removed.
-Continued development
-
-I want to continue improving my web development skills, especially JavaScript. As a Computer Science student, I'm focusing on writing cleaner, more efficient code and understanding complex DOM manipulations.
-AI Collaboration
-
-I worked with Gemini 3 Flash as a pair programmer during this project:
-
-    Debugging: AI helped me identify issues with CSS variable scope during the theme switch implementation.
-
-    Refactoring: We worked together to transition from Hungarian variable names to professional English naming conventions.
-
-    Problem Solving: AI introduced me to the concept of event delegation, which made the "Remove" button logic much cleaner.
-
-Author
-
-    Frontend Mentor - @AdamDruszad
+```bash
+git clone https://github.com/AdamDruszad/BrowserExtensionManager.git
+cd BrowserExtensionManager
+python -m http.server 4174
 ```
+
+Open `http://localhost:4174`. Depending on your Python installation, use `python3` or `py` instead of `python`. Serve the directory over HTTP: opening `index.html` directly as a file prevents reliable loading of the module and JSON data.
+
+There is no build step or production JavaScript dependency. Deploy `index.html`, `script.js`, `style.css`, `data.json` and `assets/` together to a static host.
+
+## Tests
+
+The test tools require Node.js 24.15 or newer in the Node 24 release line and npm. See `package.json` for all supported Node ranges.
+
+```bash
+npm ci
+npm test
+```
+
+Tests use Node's test runner and JSDOM. They cover filtering after toggles, focus recovery, persistence and reset, theme persistence, empty states, failed requests, invalid data and unavailable storage. Visual appearance and device-specific assistive technology behavior still need manual checks.
+
+## Implementation and credits
+
+`script.js` manages one canonical extension list and creates cards using DOM APIs. State changes update the list, persist overrides, render the active filter and restore keyboard focus when a card disappears.
+
+Design and sample assets: Frontend Mentor. Implementation: [AdamDruszad](https://github.com/AdamDruszad).
+
+The original implementation used Gemini 3 Flash for debugging and refactoring assistance. Codex assisted with subsequent reliability, accessibility and regression-test improvements.
