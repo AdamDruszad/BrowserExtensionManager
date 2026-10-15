@@ -36,4 +36,29 @@ Smaller items fixed along the way: misaligned "Try again", `cursor: wait` on an 
 
 ## 3. Redesign direction
 
-_Filled in after the build: see below._
+**Three-ink print system: ink density is state.** The page is set like a Risograph print in three inks: a blue flood for the masthead rail, fluorescent pink only for "on" (switch track, "Enabled"), yellow only for selection (selected filter, rail highlights). Enabled extensions print their logo in solid ink; paused ones drop to a halftone dot screen (CSS mask driven by a registered `--screen` property, so toggling dissolves the logo into dots and back). The toolkit strip in the rail uses the same language: one cell per extension, solid or screened, with a legend. Archivo (one variable family) supplies condensed heavy display type and normal-width UI text. Layout is a working tool, not a card wall: rail with identity and summary on the left (top band on phones), one list with an aligned column of switches on the right, sticky filter bar.
+
+Trade-off: this deliberately leaves the Frontend Mentor reference design (navy gradient, red accent, 3-column card grid). A pixel comparison against the challenge will no longer match; the README still credits and links the challenge.
+
+## 4. After scores
+
+| Area | Before | After | Evidence |
+|------|:-----:|:-----:|----------|
+| Visual design & consistency | 5 | 8 | One token set for both themes (`style.css:15-77`), named colour roles, no eyebrows/section numbers/hero metric; state is the visual signature. `after/*.png` |
+| UX & navigation | 6 | 8 | One scannable switch column, sticky filters with live "Showing N of M", Undo for removal, OS-aware theme, plurals fixed, centred retry. Wording of Enabled/Paused vs Active/Inactive kept as content (not changed). |
+| Responsiveness / mobile | 7 | 8 | rem type, rail→band below 960 px, rows restack below 600 px, no overflow at 390/768/1024/1280/1440, sticky bar and undo bar verified on a 390 px phone. |
+| Accessibility | 6 | 9 | Smallest text 14 px (was 10 px), 0 text-contrast failures, switch/selection non-text contrast 3.3–13.5:1 (was 1.11–1.94:1), h1→h2→h3 outline, one live region, focus kept on in-place toggles, 0 targets < 24 px. Not verified with a real screen reader. |
+| Performance | 4 | 9 | 142.5 KiB decoded per visit (was 2,119 KiB, −93%); 1 font file (was 4); no per-toggle list rebuild. Google Fonts stylesheet is still render-blocking. |
+| Code quality & structure | 7 | 8 | Readable stylesheet with sections and tokens, in-place updates, `deriveExtensions()` shared by load/undo, 16 tests (was 10), orphaned fonts removed. |
+| SEO basics | 5 | 7 | Canonical, Open Graph, Twitter card, theme-color, color-scheme. Still no social image (needs a real screenshot asset) and the H1 is still the slogan (kept as content). |
+| Security red flags | 8 | 9 | Added a Content-Security-Policy meta (inline theme script allowed by hash); validation and text-only rendering unchanged. Google Fonts IP disclosure remains (report only). |
+
+**After average: 8.25 / 10** (before 6.0).
+
+Verification: `npm test` 16/16 pass; `GitHub/.claude/tools/extmgr-interact.mjs` 21/21 interaction checks pass in headless Edge (theme before first paint, OS theme, in-place toggle + halftone transition, remove/undo/focus, keyboard filter + switch, reset, sticky mobile bar and undo bar, reduced motion); `shoot.mjs` reports no console errors, failed requests or overflow (the only console errors in the state captures are the deliberately simulated HTTP 500s). Impeccable detector: no findings.
+
+## 5. For the owner (not changed)
+
+- Self-host Archivo to stop sending visitor IPs to Google and remove the render-blocking third-party stylesheet.
+- Add an `og:image` once a real screenshot is chosen; `screenshot.png` in the root shows the old design and is unreferenced, as are `assets/images/logo.svg` and `logo_white.svg`.
+- Consider one vocabulary for on/off (Enabled/Paused vs Active/Inactive) — left as-is because it is existing copy.
